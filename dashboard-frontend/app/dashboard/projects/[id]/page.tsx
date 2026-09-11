@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { getAuthToken } from "@/lib/auth";
 import { fetchFromBackend } from "@/lib/api-server";
 import { taskPriorityLabel, taskStatusLabel, type ProjectResponse, type TaskResponse } from "@/lib/types";
+import DeleteProjectButton from "@/components/DeleteProjectButton";
+import DeleteTaskButton from "@/components/DeleteTaskButton";
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -44,10 +46,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         Volver a proyectos
       </Link>
 
-      <div className="mt-2">
-        <h1 className="text-2xl font-semibold text-gray-900">{project.name}</h1>
-        {project.description && <p className="mt-1 text-gray-600">{project.description}</p>}
-        <p className="mt-1 text-sm text-gray-500">Creado por {project.createdByUsername}</p>
+      <div className="mt-2 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-900">{project.name}</h1>
+          {project.description && <p className="mt-1 text-gray-600">{project.description}</p>}
+          <p className="mt-1 text-sm text-gray-500">Creado por {project.createdByUsername}</p>
+        </div>
+        <DeleteProjectButton projectId={project.id} projectName={project.name} />
       </div>
 
       <div className="mt-8 flex items-center justify-between">
@@ -90,6 +95,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                     {task.assignedToUsername && ` · asignada a ${task.assignedToUsername}`}
                   </p>
                 </div>
+                <DeleteTaskButton taskId={task.id} taskTitle={task.title} />
               </li>
             ))}
           </ul>
