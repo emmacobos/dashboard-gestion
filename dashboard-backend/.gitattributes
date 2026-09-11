@@ -1,0 +1,4 @@
+# mvnw se ejecuta dentro del contenedor Linux del Dockerfile de deploy - si
+# core.autocrlf lo convierte a CRLF en algun checkout de Windows, el shebang
+# se rompe al correr `./mvnw` en el build de Render. Forzar LF siempre.
+mvnw text eol=lf
