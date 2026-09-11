@@ -1,0 +1,12 @@
+# .gitignore de la raiz del monorepo.
+# dashboard-backend/.gitignore y dashboard-frontend/.gitignore ya cubren
+# target/, .idea/, *.iml (backend) y node_modules/, .next/, .env.local (frontend)
+# respectivamente — git los aplica igual aunque el commit se haga desde la raiz,
+# asi que no se duplican esas reglas aca.
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores (cuando se abre todo el monorepo como un solo workspace)
+.vscode/
