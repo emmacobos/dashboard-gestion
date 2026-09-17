@@ -39,3 +39,13 @@ com.emmacobos.dashboard
    ```
 
 La API queda disponible en `http://localhost:8080`.
+
+## Nota sobre el deploy (Render free tier)
+
+El backend esta deployado en el plan free de Render, que duerme el servicio
+despues de 15 minutos sin trafico. El primer request tras eso tarda entre
+30 y 50 segundos en responder mientras el contenedor arranca de nuevo - no
+es un error, es una limitacion conocida del tier gratuito. El frontend
+(Vercel) tiene el `maxDuration` de sus funciones subido a 60s para tolerar
+esa espera, y muestra un mensaje ("Conectando con el servidor...") en vez
+de fallar en silencio mientras el backend arranca.

@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import ServerLoadingNotice from "@/components/ServerLoadingNotice";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -83,6 +84,8 @@ export default function RegisterPage() {
         >
           {loading ? "Creando..." : "Crear cuenta"}
         </button>
+
+        {loading && <ServerLoadingNotice />}
 
         <p className="text-sm text-gray-600">
           Ya tenes cuenta?{" "}

@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import ServerLoadingNotice from "@/components/ServerLoadingNotice";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -71,6 +72,8 @@ export default function LoginPage() {
         >
           {loading ? "Ingresando..." : "Ingresar"}
         </button>
+
+        {loading && <ServerLoadingNotice />}
 
         <p className="text-sm text-gray-600">
           No tenes cuenta?{" "}

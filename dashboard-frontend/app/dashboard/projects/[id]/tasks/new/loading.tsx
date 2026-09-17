@@ -1,3 +1,5 @@
+import ServerLoadingNotice from "@/components/ServerLoadingNotice";
+
 export default function LoadingNewTask() {
-  return <p className="text-sm text-gray-500">Cargando formulario...</p>;
+  return <ServerLoadingNotice />;
 }

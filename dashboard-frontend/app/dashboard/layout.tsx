@@ -1,6 +1,12 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 
+// El backend en Render (free tier) puede tardar 30-50s en despertar en el
+// primer request tras estar inactivo. maxDuration en un layout se aplica a
+// todas las rutas anidadas (/dashboard/**), asi que alcanza con declararlo
+// una sola vez aca en vez de en cada page.tsx que le pega al backend.
+export const maxDuration = 60;
+
 // Header comun a todas las pantallas de /dashboard/**: evita repetir el nav
 // y el boton de logout en cada page.tsx.
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
