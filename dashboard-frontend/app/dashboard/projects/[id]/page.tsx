@@ -2,9 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAuthToken } from "@/lib/auth";
 import { fetchFromBackend } from "@/lib/api-server";
-import { taskPriorityLabel, taskStatusLabel, type ProjectResponse, type TaskResponse } from "@/lib/types";
+import type { ProjectResponse, TaskResponse } from "@/lib/types";
 import DeleteProjectButton from "@/components/DeleteProjectButton";
-import DeleteTaskButton from "@/components/DeleteTaskButton";
+import TaskBoard from "@/components/TaskBoard";
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -23,10 +23,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   if (!projectResult.ok) {
     return (
       <div>
-        <Link href="/dashboard/projects" className="text-sm text-blue-600 hover:underline">
+        <Link href="/dashboard/projects" className="font-bold text-ink underline">
           Volver a proyectos
         </Link>
-        <p className="mt-4 rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <p className="toon-panel mt-4 bg-punch/20 px-4 py-3 font-bold text-ink">
           {projectResult.status === 403
             ? "No tenes permisos para ver este proyecto."
             : projectResult.status === 404
@@ -42,64 +42,34 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   return (
     <div>
-      <Link href="/dashboard/projects" className="text-sm text-blue-600 hover:underline">
+      <Link href="/dashboard/projects" className="text-sm font-bold text-ink underline">
         Volver a proyectos
       </Link>
 
       <div className="mt-2 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">{project.name}</h1>
-          {project.description && <p className="mt-1 text-gray-600">{project.description}</p>}
-          <p className="mt-1 text-sm text-gray-500">Creado por {project.createdByUsername}</p>
+          <h1 className="font-display text-2xl font-extrabold text-ink">{project.name}</h1>
+          {project.description && <p className="mt-1 font-semibold text-ink/80">{project.description}</p>}
+          <p className="mt-1 text-sm font-bold text-ink/60">Creado por {project.createdByUsername}</p>
         </div>
         <DeleteProjectButton projectId={project.id} projectName={project.name} />
       </div>
 
       <div className="mt-8 flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-gray-900">Tareas</h2>
-        <Link
-          href={`/dashboard/projects/${project.id}/tasks/new`}
-          className="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
-        >
+        <h2 className="font-display text-lg font-bold text-ink">Tareas</h2>
+        <Link href={`/dashboard/projects/${project.id}/tasks/new`} className="toon-btn toon-btn-primary">
           Nueva tarea
         </Link>
       </div>
 
       <div className="mt-4">
         {!tasksResult.ok && (
-          <p className="rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <p className="toon-panel bg-punch/20 px-4 py-3 font-bold text-ink">
             No se pudieron cargar las tareas: {tasksResult.message}
           </p>
         )}
 
-        {tasksResult.ok && tasksResult.data.length === 0 && (
-          <p className="rounded border border-gray-200 bg-white p-4 text-sm text-gray-600">
-            Este proyecto todavia no tiene tareas.
-          </p>
-        )}
-
-        {tasksResult.ok && tasksResult.data.length > 0 && (
-          <ul className="divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white">
-            {tasksResult.data.map((task) => (
-              <li key={task.id} className="flex items-center justify-between px-4 py-3">
-                <div>
-                  <Link
-                    href={`/dashboard/projects/${project.id}/tasks/${task.id}/edit`}
-                    className="font-medium text-gray-900 hover:underline"
-                  >
-                    {task.title}
-                  </Link>
-                  <p className="text-sm text-gray-500">
-                    {taskStatusLabel(task.status)} · {taskPriorityLabel(task.priority)}
-                    {task.dueDate && ` · vence ${task.dueDate}`}
-                    {task.assignedToUsername && ` · asignada a ${task.assignedToUsername}`}
-                  </p>
-                </div>
-                <DeleteTaskButton taskId={task.id} taskTitle={task.title} />
-              </li>
-            ))}
-          </ul>
-        )}
+        {tasksResult.ok && <TaskBoard projectId={project.id} initialTasks={tasksResult.data} />}
       </div>
     </div>
   );
