@@ -18,5 +18,6 @@ public class TaskResponse {
     private LocalDate dueDate;
     private Long projectId;
     private String projectName;
+    private Long assignedToId;
     private String assignedToUsername;
 }

@@ -22,6 +22,7 @@ export type TaskResponse = {
   dueDate: string | null;
   projectId: number;
   projectName: string;
+  assignedToId: number | null;
   assignedToUsername: string | null;
 };
 

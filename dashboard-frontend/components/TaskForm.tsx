@@ -33,9 +33,7 @@ export default function TaskForm({ projectId, users, initialTask }: TaskFormProp
   const [priority, setPriority] = useState<TaskPriority>(initialTask?.priority ?? "MEDIUM");
   const [dueDate, setDueDate] = useState(initialTask?.dueDate ?? "");
   const [assignedToId, setAssignedToId] = useState(
-    initialTask?.assignedToUsername
-      ? String(users.find((user) => user.username === initialTask.assignedToUsername)?.id ?? "")
-      : "",
+    initialTask?.assignedToId != null ? String(initialTask.assignedToId) : "",
   );
 
   const [titleError, setTitleError] = useState<string | null>(null);

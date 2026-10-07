@@ -135,6 +135,7 @@ public class TaskService {
                 task.getDueDate(),
                 task.getProject().getId(),
                 task.getProject().getName(),
+                task.getAssignedTo() == null ? null : task.getAssignedTo().getId(),
                 task.getAssignedTo() == null ? null : task.getAssignedTo().getUsername());
     }
 }

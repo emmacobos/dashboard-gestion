@@ -1,15 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import {
-  taskPriorityLabel,
-  type TaskPriority,
-  type TaskResponse,
-  type TaskStatus,
-  type UserSummary,
-} from "@/lib/types";
+import { taskPriorityLabel, type TaskPriority, type TaskResponse, type TaskStatus } from "@/lib/types";
 import DeleteTaskButton from "@/components/DeleteTaskButton";
 
 type Props = { projectId: number; initialTasks: TaskResponse[] };
@@ -32,23 +26,9 @@ const PRIORITY_CLASS: Record<TaskPriority, string> = {
 // su columna original.
 export default function TaskBoard({ projectId, initialTasks }: Props) {
   const [tasks, setTasks] = useState(initialTasks);
-  const [userIdByUsername, setUserIdByUsername] = useState<Record<string, number>>({});
   const [draggedId, setDraggedId] = useState<number | null>(null);
   const [dragOverStatus, setDragOverStatus] = useState<TaskStatus | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    axios
-      .get<UserSummary[]>("/api/users")
-      .then((res) => {
-        const map: Record<string, number> = {};
-        res.data.forEach((user) => {
-          map[user.username] = user.id;
-        });
-        setUserIdByUsername(map);
-      })
-      .catch(() => {});
-  }, []);
 
   async function handleDrop(newStatus: TaskStatus) {
     setDragOverStatus(null);
@@ -70,7 +50,7 @@ export default function TaskBoard({ projectId, initialTasks }: Props) {
         status: newStatus,
         priority: task.priority,
         dueDate: task.dueDate,
-        assignedToId: task.assignedToUsername ? (userIdByUsername[task.assignedToUsername] ?? null) : null,
+        assignedToId: task.assignedToId,
       });
     } catch {
       setTasks(previousTasks);
