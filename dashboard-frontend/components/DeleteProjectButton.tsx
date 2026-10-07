@@ -18,14 +18,10 @@ export default function DeleteProjectButton({ projectId, projectName }: Props) {
 
   return (
     <div className="text-right">
-      <button
-        onClick={handleDelete}
-        disabled={deleting}
-        className="rounded bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700 disabled:opacity-50"
-      >
-        {deleting ? "Borrando..." : "Borrar proyecto"}
+      <button onClick={handleDelete} disabled={deleting} className="toon-btn toon-btn-danger">
+        {deleting ? "Borrando..." : "🗑️ Borrar proyecto"}
       </button>
-      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+      {error && <p className="mt-1 text-sm font-bold text-ink">{error}</p>}
     </div>
   );
 }

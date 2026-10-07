@@ -26,10 +26,10 @@ export default async function NewTaskPage({ params }: PageProps) {
   if (!projectResult.ok) {
     return (
       <div>
-        <Link href={`/dashboard/projects/${id}`} className="text-sm text-blue-600 hover:underline">
+        <Link href={`/dashboard/projects/${id}`} className="text-sm font-bold text-ink underline">
           Volver al proyecto
         </Link>
-        <p className="mt-4 rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <p className="toon-panel mt-4 bg-punch/20 px-4 py-3 font-bold text-ink">
           {projectResult.status === 403
             ? "No tenes permisos para agregar tareas a este proyecto."
             : projectResult.status === 404
@@ -43,10 +43,10 @@ export default async function NewTaskPage({ params }: PageProps) {
   if (!usersResult.ok) {
     return (
       <div>
-        <Link href={`/dashboard/projects/${id}`} className="text-sm text-blue-600 hover:underline">
+        <Link href={`/dashboard/projects/${id}`} className="text-sm font-bold text-ink underline">
           Volver al proyecto
         </Link>
-        <p className="mt-4 rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+        <p className="toon-panel mt-4 bg-punch/20 px-4 py-3 font-bold text-ink">
           No se pudo cargar el formulario: {usersResult.message}
         </p>
       </div>
@@ -55,7 +55,7 @@ export default async function NewTaskPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="text-2xl font-semibold text-gray-900">Nueva tarea</h1>
+      <h1 className="font-display text-2xl font-extrabold text-ink">Nueva tarea ✅</h1>
       <TaskForm projectId={Number(id)} users={usersResult.data} />
     </div>
   );

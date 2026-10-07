@@ -16,11 +16,11 @@ export default async function DashboardPage() {
   const { sub: username } = decodeJwtPayload(token);
 
   return (
-    <div className="rounded-lg bg-white p-8 shadow">
-      <h1 className="text-2xl font-semibold text-gray-900">Hola, {username}</h1>
-      <p className="mt-4 text-gray-600">
-        Gestiona tus proyectos y tareas desde{" "}
-        <Link href="/dashboard/projects" className="text-blue-600 hover:underline">
+    <div className="toon-card px-6 py-6">
+      <h1 className="font-display text-2xl font-extrabold text-ink">¡Hola, {username}! 👋</h1>
+      <p className="mt-3 font-semibold text-ink/80">
+        Gestioná tus proyectos y tareas desde{" "}
+        <Link href="/dashboard/projects" className="underline">
           Proyectos
         </Link>
         .

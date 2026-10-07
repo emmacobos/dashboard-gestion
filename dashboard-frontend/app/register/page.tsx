@@ -36,19 +36,16 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-4 rounded-lg bg-white p-8 shadow"
-      >
-        <h1 className="text-2xl font-semibold text-gray-900">Crear cuenta</h1>
+    <main className="landing-sky flex min-h-screen items-center justify-center px-4">
+      <form onSubmit={handleSubmit} className="toon-card w-full max-w-sm space-y-4 p-8">
+        <h1 className="font-display text-2xl font-extrabold text-ink">Crear cuenta ✨</h1>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="toon-pill bg-punch text-ink">{error}</p>}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Usuario</label>
+          <label className="block text-sm font-bold text-ink">Usuario</label>
           <input
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-900"
+            className="toon-input mt-1 w-full"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             required
@@ -56,10 +53,10 @@ export default function RegisterPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <label className="block text-sm font-bold text-ink">Email</label>
           <input
             type="email"
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-900"
+            className="toon-input mt-1 w-full"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
@@ -67,30 +64,26 @@ export default function RegisterPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Contrasena</label>
+          <label className="block text-sm font-bold text-ink">Contraseña</label>
           <input
             type="password"
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-900"
+            className="toon-input mt-1 w-full"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             required
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
-        >
+        <button type="submit" disabled={loading} className="toon-btn toon-btn-primary w-full">
           {loading ? "Creando..." : "Crear cuenta"}
         </button>
 
         {loading && <ServerLoadingNotice />}
 
-        <p className="text-sm text-gray-600">
-          Ya tenes cuenta?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
-            Ingresa
+        <p className="text-sm font-semibold text-ink/80">
+          ¿Ya tenés cuenta?{" "}
+          <a href="/login" className="underline">
+            Ingresá
           </a>
         </p>
       </form>

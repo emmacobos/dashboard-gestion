@@ -13,21 +13,21 @@ export const maxDuration = 200;
 // y el boton de logout en cada page.tsx.
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b border-gray-200 bg-white">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-8 py-4">
-          <nav className="flex items-center gap-6">
-            <Link href="/dashboard" className="text-lg font-semibold text-gray-900">
-              Dashboard
+    <div className="min-h-screen bg-gradient-to-b from-sky to-sky-deep">
+      <header className="border-b-[3px] border-ink bg-paper">
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-3">
+          <nav className="flex items-center gap-5">
+            <Link href="/dashboard" className="font-display text-lg font-extrabold text-ink">
+              🧭 Dashboard
             </Link>
-            <Link href="/dashboard/projects" className="text-sm text-gray-600 hover:text-gray-900">
+            <Link href="/dashboard/projects" className="toon-pill bg-cloud text-ink">
               Proyectos
             </Link>
           </nav>
           <LogoutButton />
         </div>
       </header>
-      <main className="mx-auto max-w-4xl px-8 py-8">{children}</main>
+      <main className="mx-auto max-w-4xl px-6 py-8">{children}</main>
     </div>
   );
 }

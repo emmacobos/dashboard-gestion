@@ -46,48 +46,38 @@ export default function NewProjectPage() {
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="text-2xl font-semibold text-gray-900">Nuevo proyecto</h1>
+      <h1 className="font-display text-2xl font-extrabold text-ink">Nuevo proyecto 🚀</h1>
 
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4 rounded-lg bg-white p-6 shadow">
-        {error && <p className="text-sm text-red-600">{error}</p>}
+      <form onSubmit={handleSubmit} className="toon-card mt-6 space-y-4 p-6">
+        {error && <p className="toon-pill bg-punch text-ink">{error}</p>}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Nombre</label>
-          <input
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-900"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
+          <label className="block text-sm font-bold text-ink">Nombre</label>
+          <input className="toon-input mt-1 w-full" value={name} onChange={(event) => setName(event.target.value)} />
           {(nameError || fieldErrors.name) && (
-            <p className="mt-1 text-sm text-red-600">{nameError ?? fieldErrors.name}</p>
+            <p className="mt-1 text-sm font-bold text-punch">{nameError ?? fieldErrors.name}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Descripcion</label>
+          <label className="block text-sm font-bold text-ink">Descripción</label>
           <textarea
-            className="mt-1 w-full rounded border border-gray-300 px-3 py-2 text-gray-900"
+            className="toon-input mt-1 w-full"
             rows={4}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
-          {fieldErrors.description && (
-            <p className="mt-1 text-sm text-red-600">{fieldErrors.description}</p>
-          )}
+          {fieldErrors.description && <p className="mt-1 text-sm font-bold text-punch">{fieldErrors.description}</p>}
         </div>
 
         <div className="flex gap-3">
-          <button
-            type="submit"
-            disabled={loading}
-            className="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 disabled:opacity-50"
-          >
+          <button type="submit" disabled={loading} className="toon-btn toon-btn-primary">
             {loading ? "Creando..." : "Crear proyecto"}
           </button>
           <button
             type="button"
             onClick={() => router.push("/dashboard/projects")}
-            className="rounded bg-gray-200 px-4 py-2 text-sm text-gray-800 hover:bg-gray-300"
+            className="toon-btn toon-btn-secondary"
           >
             Cancelar
           </button>

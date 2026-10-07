@@ -14,12 +14,13 @@ export default function DeleteTaskButton({ taskId, taskTitle }: Props) {
     <div className="text-right">
       <button
         onClick={handleDelete}
+        onMouseDown={(e) => e.stopPropagation()}
         disabled={deleting}
-        className="text-sm text-red-600 hover:underline disabled:opacity-50"
+        className="toon-pill bg-cloud text-ink hover:bg-punch disabled:opacity-50"
       >
-        {deleting ? "Borrando..." : "Borrar"}
+        {deleting ? "Borrando..." : "🗑️ Borrar"}
       </button>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs font-bold text-ink">{error}</p>}
     </div>
   );
 }
