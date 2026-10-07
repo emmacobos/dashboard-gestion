@@ -1,11 +1,13 @@
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 
-// El backend en Render (free tier) puede tardar 30-50s en despertar en el
-// primer request tras estar inactivo. maxDuration en un layout se aplica a
-// todas las rutas anidadas (/dashboard/**), asi que alcanza con declararlo
-// una sola vez aca en vez de en cada page.tsx que le pega al backend.
-export const maxDuration = 60;
+// El backend en Render (free tier) puede tardar mas de 2 minutos en
+// despertar tras una inactividad larga (medido: ~122s en el peor caso
+// observado). maxDuration en un layout se aplica a todas las rutas
+// anidadas (/dashboard/**), asi que alcanza con declararlo una sola vez
+// aca en vez de en cada page.tsx que le pega al backend. Mismo valor que
+// dashboard-frontend/vercel.json para las rutas de app/api/**.
+export const maxDuration = 200;
 
 // Header comun a todas las pantallas de /dashboard/**: evita repetir el nav
 // y el boton de logout en cada page.tsx.
