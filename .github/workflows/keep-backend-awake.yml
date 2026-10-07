@@ -1,0 +1,18 @@
+name: Keep backend awake
+
+# El backend corre en el free tier de Render, que duerme el servicio tras 15
+# min sin trafico (ver nota en dashboard-backend/README.md). Este ping cada
+# 10 minutos evita que llegue a dormirse en horario normal, para que alguien
+# que entre al sitio (ej. en una entrevista) no se tope con el cold start de
+# 1-2 minutos. workflow_dispatch permite dispararlo a mano para probarlo.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health endpoint
+        run: curl -sf --max-time 200 https://dashboard-gestion.onrender.com/api/test/all
