@@ -38,7 +38,19 @@ com.emmacobos.dashboard
    ./mvnw spring-boot:run
    ```
 
-La API queda disponible en `http://localhost:8080`.
+La API queda disponible en `http://localhost:8080`. El esquema lo crea Flyway
+solo al arrancar (`src/main/resources/db/migration/`) - no hace falta correr
+SQL a mano, solo que la base `dashboard_db` exista y este vacia.
+
+## Tests
+
+```bash
+./mvnw test
+```
+
+Unitarios de la capa de servicio (`ProjectService`, `TaskService`) con JUnit 5
++ Mockito, enfocados en la matriz de autorizacion: dueno vs ADMIN vs usuario
+sin relacion.
 
 ## Nota sobre el deploy (Render free tier)
 

@@ -36,7 +36,7 @@ Cada usuario gestiona sus propios proyectos y las tareas dentro de ellos:
 
 | | |
 |---|---|
-| **Backend** | Java 21 · Spring Boot 3.3.4 · Spring Security + JWT (jjwt) · Spring Data JPA · PostgreSQL |
+| **Backend** | Java 21 · Spring Boot 3.3.4 · Spring Security + JWT (jjwt) · Spring Data JPA · PostgreSQL · Flyway |
 | **Frontend** | Next.js 16 (App Router) · React 19 · Tailwind CSS · Axios |
 | **Deploy** | Backend en Render (Docker) · Frontend en Vercel · GitHub Actions (keep-alive) |
 
@@ -81,6 +81,11 @@ Vercel — es el servidor el que le habla a Render.
   un ADMIN antes de ejecutarla.
 - **El registro nunca deja elegir el rol** del lado del cliente — siempre
   asigna `ROLE_USER`, para que nadie pueda autoasignarse ADMIN.
+- **Migraciones versionadas con Flyway**, retrofiteadas sobre un esquema que
+  ya existía (creado antes por Hibernate con `ddl-auto=update`): la primera
+  migración usa `baseline-on-migrate` para no romper la base de producción
+  que ya tenía las tablas, mientras que una base nueva y vacía la ejecuta de
+  verdad. Probado contra los dos escenarios antes de deployar.
 - **Errores consistentes en JSON** (`GlobalExceptionHandler`): validación,
   404, 403 y 500 siempre con la misma forma de respuesta, nunca una página de
   error HTML.
@@ -100,8 +105,7 @@ local: [`dashboard-backend/README.md`](dashboard-backend/README.md) ·
 
 ## Qué mejoraría con más tiempo
 
-- Migraciones versionadas (Flyway/Liquibase) en vez de
-  `spring.jpa.hibernate.ddl-auto=update`.
-- Tests automatizados (unitarios de servicios, de integración de la API).
+- Tests de integración de la API completa (ya hay unitarios de la capa de
+  servicio - ver [`dashboard-backend/README.md`](dashboard-backend/README.md#tests)).
 - Backend en un plan pago para eliminar el cold start de raíz en vez de
   mitigarlo con un keep-alive.
