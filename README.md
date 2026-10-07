@@ -11,7 +11,7 @@ desacoplados y deployados por separado.
 > pero si es la primera visita en un rato puede tardar unos segundos en
 > responder — la propia app lo avisa en pantalla mientras espera.
 
-![Login](docs/screenshots/login.png)
+![Landing page](docs/screenshots/landing.png)
 
 ## Qué hace
 
@@ -19,15 +19,17 @@ Cada usuario gestiona sus propios proyectos y las tareas dentro de ellos:
 
 - Registro y login con JWT.
 - Crear, ver, editar y borrar **proyectos**.
-- Crear, ver, editar y borrar **tareas** dentro de un proyecto (estado,
-  prioridad, fecha límite, asignación a un usuario).
+- Las tareas de un proyecto se ven en un **tablero Kanban** (Por hacer / En
+  progreso / Hecho) y se arrastran entre columnas para cambiarles el estado,
+  sin recargar la página.
+- Cada tarea tiene prioridad, fecha límite y puede asignarse a un usuario.
 - Un usuario común solo ve sus propios proyectos; un **ADMIN** ve y administra
   los de todos.
 - Intentar acceder a un proyecto ajeno devuelve un mensaje claro de "no tenés
   permisos", nunca una pantalla rota ni datos de otro usuario.
 
 ![Lista de proyectos](docs/screenshots/projects.png)
-![Detalle de un proyecto](docs/screenshots/project-detail.png)
+![Tablero Kanban de un proyecto](docs/screenshots/project-detail.png)
 ![Formulario de nueva tarea](docs/screenshots/task-form.png)
 
 ## Stack
