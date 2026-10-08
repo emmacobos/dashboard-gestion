@@ -12,6 +12,12 @@ const FEATURES = [
 
 const STACK = ["Java 21", "Spring Boot", "PostgreSQL", "JWT", "Next.js", "Tailwind"];
 
+const STEPS = [
+  { num: "1", text: "Creá una cuenta o entrá a la demo." },
+  { num: "2", text: "Armá un proyecto (ej: \"Lanzar mi blog\")." },
+  { num: "3", text: "Agregale tareas y arrastralas entre columnas a medida que avanzan." },
+];
+
 export default async function LandingPage() {
   const token = await getAuthToken();
 
@@ -42,10 +48,22 @@ export default async function LandingPage() {
           Dashboard de Gestión de Proyectos
         </h1>
         <p className="toon-card mt-4 inline-block max-w-prose px-5 py-3 font-bold text-ink">
-          App full-stack desacoplada para gestionar proyectos y tareas: backend en Java +
-          Spring Boot con autenticación JWT, frontend en Next.js. Todo lo que ves corre en
-          producción, ahora mismo, con datos reales.
+          Organizá tus proyectos en tableros: creá tareas, asignales prioridad y fecha
+          límite, y arrastralas entre columnas a medida que avanzan. Por abajo: backend en
+          Java + Spring Boot con autenticación JWT, frontend en Next.js. Todo lo que ves
+          corre en producción, ahora mismo, con datos reales.
         </p>
+
+        <div className="mt-5 flex flex-wrap items-center gap-2 text-sm font-bold text-ink">
+          {STEPS.map((step, i) => (
+            <span key={step.num} className="flex items-center gap-2">
+              <span className="toon-pill bg-grass text-ink">
+                <span className="font-display">{step.num}</span> {step.text}
+              </span>
+              {i < STEPS.length - 1 && <span aria-hidden="true">→</span>}
+            </span>
+          ))}
+        </div>
 
         <div className="mt-6 flex flex-wrap gap-2">
           {STACK.map((item) => (
